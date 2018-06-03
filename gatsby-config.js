@@ -3,8 +3,7 @@ module.exports = {
     title: "Gatsby Starter Blog",
     author: "Kyle Mathews",
   },
-  plugins: [
-    {
+  plugins: [{
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/src/pages`,
@@ -14,8 +13,7 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [
-          {
+        plugins: [{
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 590,
@@ -35,6 +33,12 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography`,
+      },
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

@@ -1,0 +1,12 @@
+:not(pre)>code[class*="language-"] {
+  background: #eef;
+  color: inherit;
+  padding: 2px 5px;
+}
+
+a>code {
+  text-shadow: none;
+  text-decoration: underline;
+}
+
+.blog-post {}

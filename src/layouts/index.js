@@ -1,5 +1,7 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import '../utils/prism.css'
+import '../utils/custom.css'
 
 class Template extends React.Component {
   render() {
@@ -8,17 +10,13 @@ class Template extends React.Component {
     if (location.pathname === '/') {
       header = (
         <h1>
-          <Link to={'/'} >
-            Gatsby Starter Blog
-          </Link>
+          <Link to={'/'}>Gatsby Starter Blog</Link>
         </h1>
       )
     } else {
       header = (
         <h3>
-          <Link to={'/'}>
-            Gatsby Starter Blog
-          </Link>
+          <Link to={'/'}>Gatsby Starter Blog</Link>
         </h3>
       )
     }
@@ -34,7 +32,7 @@ class Template extends React.Component {
 Template.propTypes = {
   children: React.PropTypes.func,
   location: React.PropTypes.object,
-  route: React.PropTypes.object,
+  route: React.PropTypes.object
 }
 
 export default Template
