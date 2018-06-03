@@ -3,7 +3,7 @@ layout: post
 title: Using enums (enumerations) in javascript 📃
 date: 2017-08-21T01:45:12.000Z
 categories: javascript enums
-main_image: "https://www.sohamkamani.com/assets/images/posts/enums-in-js/text-editor-completion.png"
+main_image: "https://www.sohamkamani.com../../images/enums-in-js/text-editor-completion.png"
 description: "Enums in javascript: what they are, and how and when to use them"
 comments: true
 ---
@@ -92,7 +92,7 @@ switch(season){
 The `seasons` objects is now an implementation of an enum with four possible values. By implementing this, we have improved our code in two ways:
 
 1. **Consistency** : No more wondering about the exact value of the string for each season. Additionally, many text editors can now autocomplete these values for you (like this screenshot from teh VS code editor) :
-    ![screenshot of editor autocomplete](/assets/images/posts/enums-in-js/text-editor-completion.png)
+    ![screenshot of editor autocomplete](../../images/enums-in-js/text-editor-completion.png)
 2. **Error handling** : Even if there are spelling errors, we now have a general way of gracefully handling them. This ensures that our program will fail in a predictable way
 
 

@@ -6,10 +6,11 @@ categories: snapchat tech
 comments: true
 ---
 
-![architecture diagram](/assets/images/posts/docker-mongo-replication/center-image.png)
+![architecture diagram](../images/docker-mongo-replication/center-image.png)
 
 Replication is a technique used my MongoDB to ensure that your data is always backed up for safe keeping, in case one of your database servers decide to crash, shut down or turn into Ultron. Even though replication as a concept sounds easy, it's quite daunting for newcomers to set up their own replica sets, much less containerize them.  
 This tutorial is a beginner friendly way to set up your own MongoDB replica sets using docker.
+
 <!-- more -->
 
 ## Pre-requisites
@@ -22,7 +23,7 @@ To verify that you have docker installed run :
 docker -v
 ```
 
- ,which should output the version number. Next, we need to make sure our docker daemon is running. So run :
+,which should output the version number. Next, we need to make sure our docker daemon is running. So run :
 
 ```sh
 docker images
@@ -42,7 +43,7 @@ Great! Now were all set to get up and running.
 We are going to have 3 containers from the mongo image, all inside their own [docker container network](https://docs.docker.com/engine/userguide/networking/dockernetworks/). Let's name them `mongo1`, `mongo2`, and `mongo3`.
 These will be the three mongo instances of our replica set. We are also going to expose each of them to our local machine, so that we can access any of them using the mongo shell interface from our local machine if we need to (you will have to install MongoDB on your own machine to do this). Each of the three mongo container should be able to communicate with all other containers in the network.
 
-![architecture diagram](/assets/images/posts/docker-mongo-replication/architecture-diagram.png)
+![architecture diagram](../images/docker-mongo-replication/architecture-diagram.png)
 
 ## Setting up the network
 
@@ -109,7 +110,7 @@ $ docker run \
 mongo mongod --replSet my-mongo-set
 ```
 
->Remember to run each of these commands in a separate terminal window, since we are not running these containers in a detached state
+> Remember to run each of these commands in a separate terminal window, since we are not running these containers in a detached state
 
 ## Setting up replication
 
@@ -166,7 +167,7 @@ my-mongo-set:PRIMARY>
 This means that the shell is currently associated with the `PRIMARY` database in our `my-mongo-set` cluster.
 
 Let's play around with our new replica set to make sure it works as intended.
-*(I am omitting the `my-mongo-set:PRIMARY>` prompt for readability)*
+_(I am omitting the `my-mongo-set:PRIMARY>` prompt for readability)_
 
 We first insert a document into our primary database :
 

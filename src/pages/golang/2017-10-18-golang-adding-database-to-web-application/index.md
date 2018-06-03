@@ -11,9 +11,9 @@ This post will go through how to add a postgres database into your Go applicatio
 
 It is not enough to just add a driver and query the database in your code if you want to make your application production ready. There are a few things that you have to take care of:
 
-1. How would you write tests for your application?
-2. How will you ensure that everyone else who wants to run the application (including other servers and VMs) are using the same database structure as the one you developed?
-3. How do you most effectively make use of your computing resources?
+1.  How would you write tests for your application?
+2.  How will you ensure that everyone else who wants to run the application (including other servers and VMs) are using the same database structure as the one you developed?
+3.  How do you most effectively make use of your computing resources?
 
 <!-- more -->
 
@@ -21,7 +21,7 @@ First, lets start with adding the database to an existing application.
 
 ## Our application
 
-I have written another post on setting up a web application in Go. You can read it [here](/blog/2017/09/13/how-to-build-a-web-application-in-golang/), if you want to go into detail. In short, we have an encyclopedia of birds, that we have turned into a web application. 
+I have written another post on setting up a web application in Go. You can read it [here](/blog/2017/09/13/how-to-build-a-web-application-in-golang/), if you want to go into detail. In short, we have an encyclopedia of birds, that we have turned into a web application.
 
 - A user can make a `POST` call to create a new bird entry
 - Each entry consists of the _"species"_ and _"description"_ of the bird.
@@ -139,7 +139,6 @@ later on
 func InitStore(s Store) {
 	store = s
 }
-
 ```
 
 There are lots of benefits to creating the store as an interface
@@ -296,8 +295,8 @@ func getBirdHandler(w http.ResponseWriter, r *http.Request) {
 	/*
 		The list of birds is now taken from the store instead of the package level  `birds` variable we had earlier
 
-		The `store` variable is the package level variable that we defined in 
-		`store.go`, and is initialized during the initialization phase of the 
+		The `store` variable is the package level variable that we defined in
+		`store.go`, and is initialized during the initialization phase of the
 		application
 	*/
 	birds, err := store.GetBirds()
@@ -346,8 +345,9 @@ Using the store in the request handlers was easy, as we just saw. The tricky par
 - By using an actual database connection, our tests will not be _unit tests_ since they would be implicitly testing the store as well, which would be out of its domain.
 
 One solution to this problem is to use a mock store. The mock store will serve two purposes:
-1. It will pretend to be the actual store. By this I mean that it will accept the same arguments, and return the same type of results as the actual store implementation, without actually interacting with the database
-2. It will allow us to inspect its method calls. This is important when you want to verify that a method was called, and had the correct arguments.
+
+1.  It will pretend to be the actual store. By this I mean that it will accept the same arguments, and return the same type of results as the actual store implementation, without actually interacting with the database
+2.  It will allow us to inspect its method calls. This is important when you want to verify that a method was called, and had the correct arguments.
 
 The mock store is defined in a new file `store_mock.go`:
 
@@ -494,12 +494,11 @@ func newCreateBirdForm() *url.Values {
 	form.Set("description", "A bird of prey")
 	return &form
 }
-
 ```
 
 We can visulaize the mock store, and its interaction with the rest of our code :
 
-![mock store data flow](/assets/images/posts/golang-web-application/db_mock_flow.svg)
+![mock store data flow](../../images/golang-web-application/db_mock_flow.svg)
 
 To verify the results, run the tests with `go test`, and they should all run successfully.
 
@@ -508,7 +507,6 @@ To verify the results, run the tests with `go test`, and they should all run suc
 Now that we have tested that our store is working, _and_ that our handlers are calling the store correctly, the only thing left to do is add the code for initializing the store on application start up. For this , we will edit the `main.go` file's `main` function :
 
 ```go
-
 import (
 	//...
 	// The libn/pq driver is used for postgres

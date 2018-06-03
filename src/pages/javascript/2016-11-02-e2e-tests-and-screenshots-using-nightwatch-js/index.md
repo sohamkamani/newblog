@@ -3,13 +3,13 @@ layout: post
 title:  Using nightwatch.js to test and take screenshots of your app 🐣
 date:   2016-11-02 08:45:12
 categories: node html5 nightwatchjs e2e testing
-main_image: "https://www.sohamkamani.com/assets/images/posts/nightwatch/banner.jpg"
+main_image: "https://www.sohamkamani.com../../images/nightwatch/banner.jpg"
 comments: true
 ---
 
 End to end testing is an often overlooked area of front-end web development. Yet, it is quintessential to making sure your application works the way it should. In this post, we will go through how to seamlessly set up and execute E2E tests using an awesome library called  [nightwatch.js](http://nightwatchjs.org/), and in the process, automate screen capturing your application with each test run.
 
-![banner](/assets/images/posts/nightwatch/banner.jpg)
+![banner](../../images/nightwatch/banner.jpg)
 
 <!-- more -->
 

@@ -36,23 +36,23 @@ _All queries used in this post are made for PostgreSQL, although SQL syntax is v
 
 ## Contents
 
-1. [The three magic words](#c-1)
-2. [Our database](#c-2)
-3. [Simple Query](#c-3)
-    1. [FROM - Where do we get the data from?](#c-3-1)
-    2. [WHERE - What data should we show?](#c-3-2)
-    3. [SELECT - How should we show it?](#c-3-3)
-4. [Joins](#c-4)
-5. [Aggregations](#c-5)
-6. [Subqueries](#c-6)
-    1. [Two-dimensional table](#c-6-1)
-    1. [One-dimensional array](#c-6-2)
-    1. [Single Values](#c-6-3)
-7. [Write Operations](#c-7)
-    1. [Update](#c-7-1)
-    2. [Delete](#c-7-2)
-    3. [Insert](#c-7-3)
-8. [Feedback](#c-8)
+1.  [The three magic words](#c-1)
+2.  [Our database](#c-2)
+3.  [Simple Query](#c-3)
+    1.  [FROM - Where do we get the data from?](#c-3-1)
+    2.  [WHERE - What data should we show?](#c-3-2)
+    3.  [SELECT - How should we show it?](#c-3-3)
+4.  [Joins](#c-4)
+5.  [Aggregations](#c-5)
+6.  [Subqueries](#c-6)
+    1.  [Two-dimensional table](#c-6-1)
+    1.  [One-dimensional array](#c-6-2)
+    1.  [Single Values](#c-6-3)
+7.  [Write Operations](#c-7)
+    1.  [Update](#c-7-1)
+    2.  [Delete](#c-7-2)
+    3.  [Insert](#c-7-3)
+8.  [Feedback](#c-8)
 
 <span id="c-1"></span>
 
@@ -71,9 +71,9 @@ Let's take a look at the sample data we will be using throughout the rest of thi
 
 We have a library, with books and members. We also have another table for borrowings made.
 
--   Our "books" table has information about the title, author, date of publication, and stock available. Pretty straightforward.
--   Our "members" table only has the first and last name of all registered members.
--   The "borrowings" table has information on the books borrowed by the members. The `bookid` column refers to the id of the book in the "books" table that was borrowed, and the `memberid` column corresponds to the member in the "members" table that borrowed the book. We also have the dates when the books were borrowed, and when they are expected to be returned.
+- Our "books" table has information about the title, author, date of publication, and stock available. Pretty straightforward.
+- Our "members" table only has the first and last name of all registered members.
+- The "borrowings" table has information on the books borrowed by the members. The `bookid` column refers to the id of the book in the "books" table that was borrowed, and the `memberid` column corresponds to the member in the "members" table that borrowed the book. We also have the dates when the books were borrowed, and when they are expected to be returned.
 
 <span id="c-3"></span>
 
@@ -118,7 +118,7 @@ Now that we got all the rows we wanted from the table that we wanted, the questi
 
 In the end, you can represent the entire query as a simple diagram :
 
-![](/assets/images/posts/sql-beginners/diagram1.svg)
+![](../images/sql-beginners/diagram1.svg)
 
 <span id="c-4"></span>
 
@@ -155,35 +155,35 @@ We now want the first name and last name of everyone who has borrowed a book wri
 
 This time, we'll take a bottom-up approach to get our result :
 
--   **Step 1** - Where do we get the data from?
-    To get the result we want, we would have to join the "member" table, as well as the "books" table with the "borrowings" table.
-    The join section of the query would look like :
+- **Step 1** - Where do we get the data from?
+  To get the result we want, we would have to join the "member" table, as well as the "books" table with the "borrowings" table.
+  The join section of the query would look like :
 
-    ```sql
-    borrowings
-    JOIN books ON borrowings.bookid=books.bookid
-    JOIN members ON members.memberid=borrowings.memberid
-    ```
+  ```sql
+  borrowings
+  JOIN books ON borrowings.bookid=books.bookid
+  JOIN members ON members.memberid=borrowings.memberid
+  ```
 
-    The resulting table would be :
+  The resulting table would be :
 
-    <iframe src="https://docs.google.com/spreadsheets/d/1pHCgnSNmS3ut192JB6gAjzeJ1XmL9vRiaPvCl7aWZkE/pubhtml?gid=1040789930&amp;single=true&amp;widget=true&amp;headers=false" class="google-docs-excel-table"></iframe>
+  <iframe src="https://docs.google.com/spreadsheets/d/1pHCgnSNmS3ut192JB6gAjzeJ1XmL9vRiaPvCl7aWZkE/pubhtml?gid=1040789930&amp;single=true&amp;widget=true&amp;headers=false" class="google-docs-excel-table"></iframe>
 
--   **Step 2** - What data should we show?
-    We are only concerned with data where the author is "Dan Brown"
+- **Step 2** - What data should we show?
+  We are only concerned with data where the author is "Dan Brown"
 
-    ```sql
-    WHERE books.author='Dan Brown'
-    ```
+  ```sql
+  WHERE books.author='Dan Brown'
+  ```
 
--   **Step 3** - How should we show it?
-    Now that we got the data we want, we just want to show the first name and the last name of the members who borrowed it :
+- **Step 3** - How should we show it?
+  Now that we got the data we want, we just want to show the first name and the last name of the members who borrowed it :
 
-    ```sql
-    SELECT
-    members.firstname AS "First Name",
-    members.lastname AS "Last Name"
-    ```
+  ```sql
+  SELECT
+  members.firstname AS "First Name",
+  members.lastname AS "Last Name"
+  ```
 
 Awesome! Now we just have to combine the 3 components of our query and we get :
 
@@ -240,7 +240,7 @@ In this example, we are converting the result we got in the previous exercise in
 
 Each row in the result represents the aggregated result of each of our groups.
 
-![](/assets/images/posts/sql-beginners/diagram2.svg)
+![](../images/sql-beginners/diagram2.svg)
 
 We can also logically come to the conclusion that all fields in the result must either be specified in the `GROUP BY` statement, or have an aggregation done on them. This is because all other fields will vary row wise, and if they were `SELECT`ed, we would'nt know which of their possible values to take.
 
@@ -269,7 +269,7 @@ Here the `sum` function, only works on the `stock` column, summing all values fo
 
 ## 6. Subqueries
 
-<img src="/assets/images/posts/sql-beginners/meme1.jpg" style="width:60%;"/>
+<img src="../images/sql-beginners/meme1.jpg" style="width:60%;"/>
 
 Sub queries are regular SQL queries, that are embedded inside larger queries.
 
@@ -422,7 +422,7 @@ WHERE author='Dan Brown';
 
 `WHERE` still performs the same function here, which is that of choosing rows. Instead of `SELECT` which we used in our read queries, we now use `SET`. However, now, in addition to mentioning the column names, you also have to mention the new value of the columns in the selected rows as well.
 
-![](/assets/images/posts/sql-beginners/diagram3.svg)
+![](../images/sql-beginners/diagram3.svg)
 
 <span id="c-7-2"></span>
 
@@ -467,7 +467,7 @@ VALUES
 
 ## 8. Feedback
 
-Now that we have come to the end of the guide, it's time for a small test. Take a look at the first query at the very beginning of this post. Can you try to figure out what it does? Try breaking it down into its `SELECT`, `FROM`, `WHERE`, `GROUP BY`, and subquery components.  
+Now that we have come to the end of the guide, it's time for a small test. Take a look at the first query at the very beginning of this post. Can you try to figure out what it does? Try breaking it down into its `SELECT`, `FROM`, `WHERE`, `GROUP BY`, and subquery components.
 
 Here it is written in a more readable way :
 
@@ -497,7 +497,7 @@ Result :
 <br>
 Hopefully you were able to get the answer no sweat, but if not, I would love your feedback or comments on how I could make this post better. Cheers!
 
------
+---
 
 <span class="footnotes">_Edit - Changed `INNER JOIN` to `JOIN`, on suggestions of many in the comments, and also because it's simpler to understand._</span><br>
 <span class="footnotes">_Edit - Changed title from "A beginners guide to thinking in SQL 🐘" to "A beginners guide to SQL 🐘"_</span>

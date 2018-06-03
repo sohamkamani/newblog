@@ -16,10 +16,10 @@ This post explains what causes CSRF attacks, and what you can do to prevent them
 
 It's all in the name :
 
-- __Request forgery__ : Sending a request which appears to be legitimate but is actually malicious.
-- __Cross site__ : coming from a site other than the one for which it is intended.
+- **Request forgery** : Sending a request which appears to be legitimate but is actually malicious.
+- **Cross site** : coming from a site other than the one for which it is intended.
 
-But how can these other sites send such a request, and how can it be forged to appear like a legitimate request? The answer lies in the design of web browsers and how they send requests.  
+But how can these other sites send such a request, and how can it be forged to appear like a legitimate request? The answer lies in the design of web browsers and how they send requests.
 
 Consider two websites : a not-so-innocent news website (lets call it _sillyfakenews.com_), and your go-to social media portal (lets call it _facehook.com_). Let's say you're already logged in to _facehook.com_, on another tab in your browser. One of the many posts you see on it includes a link to _sillyfakenews.com_, and since it looks interesting you open it in another tab, while still logged into facehook.
 
@@ -29,7 +29,7 @@ Now, since you already have an active session with facehook on the same browser 
 
 The way browsers are designed, _any_ request made from _any_ site is treated the same with respect to cookies. This is why even though the request to facehook is _sent_ from _sillyfakenews.com_, all the cookies associated with the current logged in session in _facehook.com_ are sent as well.
 
-![demo comic](/assets/images/posts/web-security-essentials/xsrf-demo.svg)
+![demo comic](../../images/web-security-essentials/xsrf-demo.svg)
 
 ## CSRF Prevention
 

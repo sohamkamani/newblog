@@ -6,7 +6,7 @@ categories: web security sql injection
 comments: true
 ---
 
-So you thought your database was completely safe? Well, for the most part, it actually is. Modern databases have _lots_ of security features to prevent them from being compromised by an attacker. However, even with the most secure database, there is still a way in which a backdoor can be created to compromise it right from the browser!  
+So you thought your database was completely safe? Well, for the most part, it actually is. Modern databases have _lots_ of security features to prevent them from being compromised by an attacker. However, even with the most secure database, there is still a way in which a backdoor can be created to compromise it right from the browser!
 
 This post will explain why SQL injection occurs and how you can prevent it.
 
@@ -14,7 +14,7 @@ This post will explain why SQL injection occurs and how you can prevent it.
 
 For starters, lets assume there's a simple form on your website to sign up a new user.
 
-![signupform](/assets/images/posts/web-security-essentials/signupform.png)
+![signupform](../../images/web-security-essentials/signupform.png)
 
 Now as soon as you sign up a new user, you have to create a new entry in the database.
 
@@ -30,7 +30,7 @@ What you would now do is replace `<username>` and `<password>` with the values e
 INSERT INTO `users` (username, password) VALUES ('John Doe', 'j0hnd03');
 ```
 
-Now, for a normal use case, this would work just fine. But what happens if I got smart and changed my username to ``','');DROP TABLE `users`;-- `` ?
+Now, for a normal use case, this would work just fine. But what happens if I got smart and changed my username to `` ','');DROP TABLE `users`;-- `` ?
 
 Once we insert this username into our query, it turns into :
 
@@ -48,7 +48,7 @@ Make sure you always escape all your SQL queries! This means replacing special c
 
 This is actually easier said than done, considering larger projects often have hundreds of queries with even more parameters to take care of, and it's often impossible to make sure _everything_ is escaped. The solution?
 
-__Use an ORM instead of writing your own queries.__ ORMs like [this one](https://ponyorm.com/#) for python, or [this one](http://sequelize.readthedocs.io/en/v3/) for NodeJs make sure that your queries are safe, even if you have a lot of questionable characters in your input parameters.
+**Use an ORM instead of writing your own queries.** ORMs like [this one](https://ponyorm.com/#) for python, or [this one](http://sequelize.readthedocs.io/en/v3/) for NodeJs make sure that your queries are safe, even if you have a lot of questionable characters in your input parameters.
 
 If you want to learn more about security on the web, be sure to read my [other posts on web security essentials](/blog/2017/01/16/web-security-essentials/) :
 
@@ -58,4 +58,3 @@ If you want to learn more about security on the web, be sure to read my [other p
 [Sessions and cookies](/blog/2017/01/08/web-security-session-cookies/)  
 [CSRF (Cross site request forgery)](/blog/2017/01/14/web-security-cross-site-request-forgery/)  
 [Human Error and UI/UX design](/blog/2017/01/14/web-security-human-error/)
-

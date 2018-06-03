@@ -6,7 +6,7 @@ categories: react redux connect
 comments: true
 ---
 
-Redux is a terribly simple library for state management, and has made working with React more manageable for everyone. However, there are a lot of cases where people blindly follow boilerplate code to integrate redux with their React application without understanding all the moving parts involved. 
+Redux is a terribly simple library for state management, and has made working with React more manageable for everyone. However, there are a lot of cases where people blindly follow boilerplate code to integrate redux with their React application without understanding all the moving parts involved.
 
 There is an entire library, called [react-redux](https://github.com/reactjs/react-redux) whose sole purpose is to seamlessly integrate redux's state management into a React application. I feel that it's important to know what's going on when you do something that essentially forms the backbone of your application.
 
@@ -16,19 +16,19 @@ There is an entire library, called [react-redux](https://github.com/reactjs/reac
 
 At this point it's hard for some to believe, but redux and React are actually two separate libraries which can and have been used completely independent of each other. Lets take a look at redux's state management flow :
 
-![redux flow diagram](/assets/images/posts/react-redux-explanation/redux-flow.svg)
+![redux flow diagram](../../images/react-redux-explanation/redux-flow.svg)
 
 If you have worked with redux before, you know that its functionality revolves around a "store", which is where the state of the application lives. There is no way anyone can directly modify the store. The only way to do so is through reducers, and the only way to trigger reducers is to dispatch actions. So ultimately :
 
->To change data, we need to __dispatch__ an action
+> To change data, we need to **dispatch** an action
 
 On the other hand, when we want to retrieve data, we do not get it directly from the store. Instead, we get a snapshot of the data in the store at any point in time using `store.getState()` , which gives us the "state" of the application as on the time at which we called the `getState` method.
 
->To obtain data we need to get the current __state__ of the store
+> To obtain data we need to get the current **state** of the store
 
 Now, let's come to the (simplified) component structure of a [standard react todo-mvc application](http://todomvc.com/examples/react/#/) :
 
-![react flow diagram](/assets/images/posts/react-redux-explanation/react-flow.svg)
+![react flow diagram](../../images/react-redux-explanation/react-flow.svg)
 
 ## Putting them together
 
@@ -38,20 +38,22 @@ If we want to link our React application with the redux store, we first have to 
 
 ```js
 //This is the store we create with redux's createStore method
-const store = createStore(todoApp,{})
+const store = createStore(todoApp, {})
 
 // Provider is given the store as a prop
 render(
   <Provider store={store}>
-    <App/>
-  </Provider>, document.getElementById('app-node'))
+    <App />
+  </Provider>,
+  document.getElementById('app-node')
+)
 ```
 
 Since the provider only makes the store accessible to it's children, and we would ideally want our entire app to access the store, the most sensible thing to do would be to put our `App` component within `Provider`.
 
 If we were to follow the previous diagram, the `Provider` node would be represented as a parent node on top of the `App` node. However, because of the utility that `Provider` gives us, I feel it's more appropriate to represent it as something which "wraps" the entire application tree, like this :
 
-![react flow diagram with provider](/assets/images/posts/react-redux-explanation/react-flow-provider.svg)
+![react flow diagram with provider](../../images/react-redux-explanation/react-flow-provider.svg)
 
 ### Connect
 
@@ -61,9 +63,9 @@ We established previously that there is no way to directly interact with the sto
 This is precisely what `connect` does. Consider this piece of code, which uses `connect` to map the stores state and dispatch to the props of a component :
 
 ```js
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-const TodoItem = ({todo, destroyTodo}) => {
+const TodoItem = ({ todo, destroyTodo }) => {
   return (
     <div>
       {todo.text}
@@ -74,15 +76,16 @@ const TodoItem = ({todo, destroyTodo}) => {
 
 const mapStateToProps = state => {
   return {
-    todo : state.todos[0]
+    todo: state.todos[0]
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    destroyTodo : () => dispatch({
-      type : 'DESTROY_TODO'
-    })
+    destroyTodo: () =>
+      dispatch({
+        type: 'DESTROY_TODO'
+      })
   }
 }
 
@@ -98,10 +101,10 @@ In this case, `mapStateToProps` returns an object with only one key : "todo", an
 
 The connected component (which is exported) provides `todo` and `destroyTodo` as props to `TodoItem`.
 
-![final connect flow](/assets/images/posts/react-redux-explanation/final-connect-flow.svg)
+![final connect flow](../../images/react-redux-explanation/final-connect-flow.svg)
 
 It's important to note that only components _within_ the `Provider` can be connected (In the above diagram, the connect is done _through_ the Provider).
 
-Redux is a powerful tool and even more so when combined with React. It really helps to know why each part of the `react-redux` library is used, and hopefully after reading this post, the function of `Provider` and `connect` is clear. 
+Redux is a powerful tool and even more so when combined with React. It really helps to know why each part of the `react-redux` library is used, and hopefully after reading this post, the function of `Provider` and `connect` is clear.
 
 If you want to know how to use redux in an efficient and easy to use manner for calling APIs, you should read my other post on [a simplified approach to calling APIs with redux](/blog/2016/06/05/redux-apis/)

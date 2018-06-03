@@ -3,7 +3,7 @@ layout: post
 title: Make your node server faster by caching responses with redis ⏰
 date: 2016-10-14T08:45:12.000Z
 categories: javascript node js redis caching cache
-main_image: "https://www.sohamkamani.com/assets/images/posts/js-cache/logo.png"
+main_image: "https://www.sohamkamani.com../../images/js-cache/logo.png"
 comments: true
 ---
 
@@ -11,7 +11,7 @@ NodeJs is known for its speed with respect to async tasks, but there's still a l
 
 In this post, we are going to go through a brief introduction to the concept of caching, along with a tutorial on how to implement it using redis and an express server.
 
-![banner](/assets/images/posts/js-cache/logo.png)
+![banner](../../images/js-cache/logo.png)
 
 <!-- more -->
 
@@ -19,11 +19,11 @@ In this post, we are going to go through a brief introduction to the concept of 
 
 Normally, when you make a web server with a database, each request to the server entails one or more requests to the database, and some processing of the results before sending back a response.
 
-![normal-flow](/assets/images/posts/js-cache/normal-flow.svg)
+![normal-flow](../../images/js-cache/normal-flow.svg)
 
 For example, consider a database which has a list of peoples names, along with their age. Our server handles requests which contain a persons name, and returns their age after querying the database.
 
-![normal-flow](/assets/images/posts/js-cache/normal-example.svg)
+![normal-flow](../../images/js-cache/normal-example.svg)
 
 This seems pretty straightforward, but can sometimes be inefficient. If there are a lot of people who want to know Doug's age, and we get many requests to our server asking for it, we should find a better way than to query the database each time we receive a request (Since so many database queries can be expensive).
 
@@ -31,7 +31,7 @@ __Enter : the cache layer__
 
 The cache layer is a temporary datastore, which is much faster than the database. The server, after receiving a request, first checks if the cache has the response available. If so, it sends it to the client. If not, it queries the database as usual, and stores the response in the cache before sending it back to the client. This way, every response is either cached, or retrieved from the cache, and as a result, the load to our server and database is reduced.
 
-![with cache](/assets/images/posts/js-cache/with-cache.svg)
+![with cache](../../images/js-cache/with-cache.svg)
 
 ## Building our server
 

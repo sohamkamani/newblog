@@ -5,23 +5,23 @@ date: 2018-02-25T01:45:12.000Z
 categories: go golang
 description: "This post demonstrates how to sign up and sign in users using password authentication in Go"
 comments: true
-main_image: https://www.sohamkamani.com/assets/images/posts/go-misc/pw-storage-logo.png
+main_image: https://www.sohamkamani.com../../images/go-misc/pw-storage-logo.png
 ---
 
 Any application that involves password storage and authentication has to make sure that its passwords are safely stored. You cannot simply store the username and password of your users the way you store other types of data. In fact, it should be impossible for you to actually _know_ the password of any of your users.
 
 This post will go through how to securely store your users password by building a very simple web application in Go, and using a Postgres database to store your users credentials.
+
 <!-- more -->
 
-![banner](/assets/images/posts/go-misc/pw-storage-logo.png)
+![banner](../../images/go-misc/pw-storage-logo.png)
 
 - [Overview](#overview)
 - [Initializing the web application](#initializing-the-web-application)
-  * [Creating our database](#creating-our-database)
-  * [Initializing the HTTP server](#initializing-the-http-server)
+  - [Creating our database](#creating-our-database)
+  - [Initializing the HTTP server](#initializing-the-http-server)
 - [Implementing user sign up](#implementing-user-sign-up)
 - [Implementing user login](#implementing-user-login)
-
 
 ## Overview
 
@@ -32,7 +32,7 @@ We are going to build a simple HTTP server with two routes: `/signup` and `/sign
 
 We will be using the [bcrypt](https://godoc.org/golang.org/x/crypto/bcrypt) algorithm to hash and salt our passwords. If want to know more about hashing, salting, and the theory behind secure password storage, you can read my [previous post](/blog/2017/01/01/web-security-password-storage/).
 
->If you just want to see the working source code of this implementation, you can view it [here](https://github.com/sohamkamani/go-password-auth-example).
+> If you just want to see the working source code of this implementation, you can view it [here](https://github.com/sohamkamani/go-password-auth-example).
 
 ## Initializing the web application
 
@@ -115,7 +115,7 @@ func Signup(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		// If there is something wrong with the request body, return a 400 status
 		w.WriteHeader(http.StatusBadRequest)
-		return 
+		return
 	}
 	// Salt and hash the password using the bcrypt algorithm
 	// The second argument is the cost of hashing, which we arbitrarily set as 8 (this value can be more or less, depending on the computing power you wish to utilize)
@@ -160,13 +160,13 @@ We now have to create a handler that will authenticate a user given his username
 
 ```go
 func Signin(w http.ResponseWriter, r *http.Request){
-	// Parse and decode the request body into a new `Credentials` instance	
+	// Parse and decode the request body into a new `Credentials` instance
 	creds := &Credentials{}
 	err := json.NewDecoder(r.Body).Decode(creds)
 	if err != nil {
-		// If there is something wrong with the request body, return a 400 status		
+		// If there is something wrong with the request body, return a 400 status
 		w.WriteHeader(http.StatusBadRequest)
-		return 
+		return
 	}
 	// Get the existing entry present in the database for the given username
 	result := db.QueryRow("select password from users where username=$1", creds.Username)

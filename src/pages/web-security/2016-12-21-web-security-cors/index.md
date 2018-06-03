@@ -14,9 +14,9 @@ This post will go through some of the key concepts of CORS, and emphasize why we
 
 ## What is CORS?
 
-The best way to explain it is through an example.  
+The best way to explain it is through an example.
 
-First, Open up your browser, and navigate to  [stackoverflow.com](http://stackoverflow.com/).
+First, Open up your browser, and navigate to [stackoverflow.com](http://stackoverflow.com/).
 
 Next, open up your browsers console, and run this snippet :
 
@@ -26,7 +26,7 @@ fetch('http://stackoverflow.com').then(res => console.log(res))
 
 You should see this nice clean response returned back, like this :
 
-![console](/assets/images/posts/web-security-essentials/cors-console.png)
+![console](../../images/web-security-essentials/cors-console.png)
 
 All fine and dandy! We used the browsers `fetch` API to get the content of stackoverflow's webpage, by making an http request. Now, lets try getting wikipedias homepage instead :
 
@@ -36,11 +36,11 @@ fetch('http://wikipedia.org').then(res => console.log(res))
 
 If you run this, you should see an error like this :
 
-![console](/assets/images/posts/web-security-essentials/cors-console-no-origin.png)
+![console](../../images/web-security-essentials/cors-console-no-origin.png)
 
 It looks like we're not allowed to get the details of wikipedias homepage. In fact, if you make a request to _any_ origin other than stackoverflow, you will see this error. _However_, if you open your console on any wikipedia page , and make a request for wikipedias homepage, you would get a good response once again.
 
-To put it simply, _it is forbidden to make a request to any origin, other than the one your code is running in_, unless otherwise allowed by its server. This is called the __same origin policy__.
+To put it simply, _it is forbidden to make a request to any origin, other than the one your code is running in_, unless otherwise allowed by its server. This is called the **same origin policy**.
 
 Almost all urls serving their resources will have a CORS policy. By default, if there is no policy, it is assumed that CORS is disabled. But why would anyone want to disable access to their origin? This brings us to our next section :
 
@@ -52,11 +52,11 @@ All requests sent from your browser are treated the same. The server receiving t
 
 This means that this :
 
-![console](/assets/images/posts/web-security-essentials/comic1.svg)
+![console](../../images/web-security-essentials/comic1.svg)
 
 Could turn into this :
 
-![console](/assets/images/posts/web-security-essentials/comic2.svg)
+![console](../../images/web-security-essentials/comic2.svg)
 
 ## How strictly is CORS enforced?
 
@@ -68,11 +68,11 @@ CORS isn't actually _enforced_ by the server, but rather the _browser_. The serv
 
 Of course, all popular browsers in use today do follow the same origin policy. Some applications like postman, curl do not respect this policy, because they are meant to be used as developer tools, and as such it is expected that the people using these tools know what they're doing.
 
-![console](/assets/images/posts/web-security-essentials/corscomic.png)
+![console](../../images/web-security-essentials/corscomic.png)
 
 ## Caveats and exceptions
 
- 1.__Fetch can make cross origin requests__ : Well... kind of. There is a `no-cors` mode that can be made use of to make cross origin requests with `fetch`, like this
+1.**Fetch can make cross origin requests** : Well... kind of. There is a `no-cors` mode that can be made use of to make cross origin requests with `fetch`, like this
 
 ```js
 fetch('http://wikipedia.org', {
@@ -82,14 +82,13 @@ fetch('http://wikipedia.org', {
 
 However, you won't be able to read this response for the same reasons as before. This is only useful if you want to do things like response forwarding.
 
-2.__CORS can be stricter than usual__ : The above comic is not always true. If a server really does not want other clients to receive a response, it can disable CORS for non browser clients as well. This means that you can _only_ make requests from the same origin, and that tools like postman and curl can't make requests either. Although this is possible, it generally isn't the case.
+2.**CORS can be stricter than usual** : The above comic is not always true. If a server really does not want other clients to receive a response, it can disable CORS for non browser clients as well. This means that you can _only_ make requests from the same origin, and that tools like postman and curl can't make requests either. Although this is possible, it generally isn't the case.
 
 If you want to learn more about security on the web, be sure to read my [other posts on web security essentials](/blog/2017/01/16/web-security-essentials/) :
 
 [XSS (Cross site scripting)](/blog/2016/11/24/web-security-xss/)  
 [SQL Injection](/blog/2016/11/24/what-is-sql-injection/)  
 [Password storage](/blog/2017/01/01/web-security-password-storage/)  
-[Sessions and cookies](/blog/2017/01/08/web-security-session-cookies/)   
+[Sessions and cookies](/blog/2017/01/08/web-security-session-cookies/)  
 [CSRF (Cross site request forgery)](/blog/2017/01/14/web-security-cross-site-request-forgery/)  
 [Human Error and UI/UX design](/blog/2017/01/14/web-security-human-error/)
-

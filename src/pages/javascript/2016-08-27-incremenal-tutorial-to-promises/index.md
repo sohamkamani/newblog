@@ -6,7 +6,7 @@ categories: javascript promises beginners guide tutorial
 comments: true
 ---
 
-![cover](/assets/images/posts/promise-guide/cover.jpg)
+![cover](../../images/promise-guide/cover.jpg)
 
 Promises are arguably one of the trickiest concepts to grasp in the javascript world, and even if you know how to use them, it's difficult to explain how they actually work.  
 This FAQ style tutorial is meant for both beginners and intermediates in the world of promises.  If you're a beginner and have trouble grasping what a promise even _is_, then go on ahead and start from the first question. If you know a little about promises, jump through the questions until you find one on interest (the sections in this tutorial are of increasing complexity as you go further)
@@ -178,15 +178,15 @@ containerPromise.then(newValue => {
 
 `aNewPromise` calls `originalPromise`'s `then` method to return a new promise that resolves to "foo"
 
-![diagram1](/assets/images/posts/promise-guide/pd1.svg)
+![diagram1](../../images/promise-guide/pd1.svg)
 
 `containerPromise` calls `anotherPromise`'s `then` method to return a new promise that resolves to `aNewPromise`
 
-![diagram2](/assets/images/posts/promise-guide/pd2.svg)
+![diagram2](../../images/promise-guide/pd2.svg)
 
 But, we know that `aNewPromise` resolves to "foo", so we can expand its block to get the overall diagram :
 
-![diagram3](/assets/images/posts/promise-guide/pd3.svg)
+![diagram3](../../images/promise-guide/pd3.svg)
 
 <div id="c6"></div>
 
@@ -238,7 +238,7 @@ Both versions give us the exact same promise. So, if you're planning on wrapping
 
 All versions of `theAnswerToEverything` can be shown as :
 
-![diagram4](/assets/images/posts/promise-guide/pd4.svg)
+![diagram4](../../images/promise-guide/pd4.svg)
 
 <div id="c7"></div>
 
@@ -279,7 +279,7 @@ It's actually quite easy to execute multiple promises in parallel. For this, we 
 
 `Promise.all` combines the two promises (`getGoogleHomePage` and `getBingHomePage`), and returns another promise, which resolves to an array of results, which are in the same order as the original promises. You can combine as many promises as required in this fashion.
 
-![diagram5](/assets/images/posts/promise-guide/pd5.svg)
+![diagram5](../../images/promise-guide/pd5.svg)
 
 >💡 Remember : `Promise.all` initiates all its member promises at the same time, and the combined promise only resolves when __all__ its member promises have resolved.
 

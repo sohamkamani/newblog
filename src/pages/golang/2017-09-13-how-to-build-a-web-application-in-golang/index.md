@@ -4,11 +4,11 @@ title: Build a web application in Go (golang) 🕸
 date: 2017-09-13T01:45:12.000Z
 categories: go golang web
 description: "An end to end tutorial on how to build a full stack web application in golang"
-main_image: https://www.sohamkamani.com/assets/images/posts/golang-web-application/blog-golang-web-app-arch.svg
+main_image: https://www.sohamkamani.com../../images/golang-web-application/blog-golang-web-app-arch.svg
 comments: true
 ---
 
-Go is getting more and more popular as the go-to language to build web applications. 
+Go is getting more and more popular as the go-to language to build web applications.
 
 This is in no small part due to its speed and application performance, as well as its portability. There are many resources on the internet to teach you how to build end to end web applications in Go, but for the most part they are either scattered in the form of isolated blog posts, or get into too much detail in the form of books.
 
@@ -20,23 +20,23 @@ The only prerequisite for this tutorial is a beginner level understanding of the
 
 ## Contents
 
-1. ["Full Stack" ?](#full-stack-)
-1. [Setting up your environment](#setting-up-your-environment)  
-	- [Set up your $GOPATH](#1-set-up-your-gopath)
-	- [Set up your directory structure](#2-set-up-your-directory-structure)
-	- [Creating your project directory](#3-creating-your-project-directory)
-1. [Starting an HTTP server](#starting-an-http-server)
-1. [Making routes](#making-routes)
-	- [Installing external libraries](#installing-external-libraries)
-	- [Testing](#testing)
-	- [Making our routing testable](#making-our-routing-testable)
-1. [Serving static files](#serving-static-files)
-	- [Create static assets](#create-static-assets)
-	- [Modify the router](#modify-the-router)
-	- [Testing the static file server](#testing-the-static-file-server)
-	- [Making a simple browser app](#making-a-simple-browser-app)
-1. [Adding the bird REST API handlers](#adding-the-bird-rest-api-handlers)
-1. [Adding a database](#adding-a-database)
+1.  ["Full Stack" ?](#full-stack-)
+1.  [Setting up your environment](#setting-up-your-environment)
+    - [Set up your $GOPATH](#1-set-up-your-gopath)
+    - [Set up your directory structure](#2-set-up-your-directory-structure)
+    - [Creating your project directory](#3-creating-your-project-directory)
+1.  [Starting an HTTP server](#starting-an-http-server)
+1.  [Making routes](#making-routes)
+    - [Installing external libraries](#installing-external-libraries)
+    - [Testing](#testing)
+    - [Making our routing testable](#making-our-routing-testable)
+1.  [Serving static files](#serving-static-files)
+    - [Create static assets](#create-static-assets)
+    - [Modify the router](#modify-the-router)
+    - [Testing the static file server](#testing-the-static-file-server)
+    - [Making a simple browser app](#making-a-simple-browser-app)
+1.  [Adding the bird REST API handlers](#adding-the-bird-rest-api-handlers)
+1.  [Adding a database](#adding-a-database)
 
 ## "Full Stack" ?
 
@@ -47,16 +47,15 @@ We are going to build a community encyclopedia of birds. This website will :
 
 This application will require three components :
 
-1. The web server
-2. The front-end (client side) app
-3. The database
+1.  The web server
+2.  The front-end (client side) app
+3.  The database
 
-![Image showing application architecture](/assets/images/posts/golang-web-application/blog-golang-web-app-arch.svg)
-
+![Image showing application architecture](../../images/golang-web-application/blog-golang-web-app-arch.svg)
 
 ## Setting up your environment
 
->This section describes how to set up your environment and project structure for the first time. If you have built another project in go, or know the standard directory structure, you can skip this section and go to the [next one](#starting-an-http-server)
+> This section describes how to set up your environment and project structure for the first time. If you have built another project in go, or know the standard directory structure, you can skip this section and go to the [next one](#starting-an-http-server)
 
 ### 1. Set up your $GOPATH
 
@@ -89,7 +88,7 @@ The purpose of each directory can be seen from its name:
 
 - `bin` - is where all the executable binaries created by compiling your code go
 - `pkg` - Contains package objects made by libraries (which you don't have to worry about now)
-- `src` - is where __all__ your Go source code goes. Yes, all of it. Even that weird side project that you are thinking of making.
+- `src` - is where **all** your Go source code goes. Yes, all of it. Even that weird side project that you are thinking of making.
 
 ### 3. Creating your project directory
 
@@ -145,7 +144,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
->`fmt.Fprintf`, unlike the other "printf" statements you may know, takes a "writer" as its first argument. The second argument is the data that is piped into this writer. The output therefore appears according to where the writer moves it. In our case the ResponseWriter `w` writes the output as the response to the users request.
+> `fmt.Fprintf`, unlike the other "printf" statements you may know, takes a "writer" as its first argument. The second argument is the data that is piped into this writer. The output therefore appears according to where the writer moves it. In our case the ResponseWriter `w` writes the output as the response to the users request.
 
 You can now run this file :
 
@@ -251,7 +250,7 @@ Testing is an essential part of making any application "production quality". It 
 
 Lets start by testing our handler. Create a file called `main_test.go`:
 
-```go 
+```go
 //main_test.go
 
 package main
@@ -265,8 +264,8 @@ import (
 func TestHandler(t *testing.T) {
 	//Here, we form a new HTTP request. This is the request that's going to be
 	// passed to our handler.
-	// The first argument is the method, the second argument is the route (which 
-	//we leave blank for now, and will get back to soon), and the third is the 
+	// The first argument is the method, the second argument is the route (which
+	//we leave blank for now, and will get back to soon), and the third is the
 	//request body, which we don't have in this case.
 	req, err := http.NewRequest("GET", "", nil)
 
@@ -277,11 +276,11 @@ func TestHandler(t *testing.T) {
 
 	// We use Go's httptest library to create an http recorder. This recorder
 	// will act as the target of our http request
-	// (you can think of it as a mini-browser, which will accept the result of 
+	// (you can think of it as a mini-browser, which will accept the result of
 	// the http request that we make)
 	recorder := httptest.NewRecorder()
 
-	// Create an HTTP handler from our handler function. "handler" is the handler 
+	// Create an HTTP handler from our handler function. "handler" is the handler
 	// function defined in our main.go file that we want to test
 	hf := http.HandlerFunc(handler)
 
@@ -304,7 +303,7 @@ func TestHandler(t *testing.T) {
 }
 ```
 
->Go uses a convention to ascertains a test file when it has the pattern `*_test.go`
+> Go uses a convention to ascertains a test file when it has the pattern `*_test.go`
 
 To run this test, just run :
 
@@ -320,7 +319,7 @@ If you notice in our previous snippet, we left the "route" blank while creating 
 
 Well, turns out that this test was only testing our _handler_ and not the _routing to our handler_. In simpler terms, this means that the above test ensures that the request coming in will get served correctly _provided_ that it's delivered to the correct handler.
 
-In this section, we will test this routing, so that we can be sure that each handler is mapped to the correct HTTP route. 
+In this section, we will test this routing, so that we can be sure that each handler is mapped to the correct HTTP route.
 
 Before we go on to test our routing, it's necessary to make sure that our code _can_ be tested for this. Modify the `main.go` file to look like this:
 
@@ -409,7 +408,7 @@ Now we know that every time we hit the `GET /hello` route, we get a response of 
 func TestRouterForNonExistentRoute(t *testing.T) {
 	r := newRouter()
 	mockServer := httptest.NewServer(r)
-	// Most of the code is similar. The only difference is that now we make a 
+	// Most of the code is similar. The only difference is that now we make a
 	//request to a route we know we didn't define, like the `POST /hello` route.
 	resp, err := http.Post(mockServer.URL+"/hello", "", nil)
 
@@ -422,7 +421,7 @@ func TestRouterForNonExistentRoute(t *testing.T) {
 		t.Errorf("Status should be 405, got %d", resp.StatusCode)
 	}
 
-	// The code to test the body is also mostly the same, except this time, we 
+	// The code to test the body is also mostly the same, except this time, we
 	// expect an empty body
 	defer resp.Body.Close()
 	b, err := ioutil.ReadAll(resp.Body)
@@ -447,9 +446,9 @@ Now that we've learned how to create a simple http server, we can serve static f
 
 There are 3 steps we need to take in order to make our server serve these static assets.
 
-1. Create static assets
-2. Modify our router to serve static assets
-3. Add tests to verify that our new server can serve static files
+1.  Create static assets
+2.  Modify our router to serve static assets
+3.  Add tests to verify that our new server can serve static files
 
 ### Create static assets
 
@@ -474,7 +473,7 @@ func newRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/hello", handler).Methods("GET")
 
-	// Declare the static file directory and point it to the 
+	// Declare the static file directory and point it to the
 	// directory we just made
 	staticFileDirectory := http.Dir("./assets/")
 	// Declare the handler, that routes requests to their respective filename.
@@ -482,7 +481,7 @@ func newRouter() *mux.Router {
 	// remove the "/assets/" prefix when looking for files.
 	// For example, if we type "/assets/index.html" in our browser, the file server
 	// will look for only "index.html" inside the directory declared above.
-	// If we did not strip the prefix, the file server would look for 
+	// If we did not strip the prefix, the file server would look for
 	// "./assets/assets/index.html", and yield an error
 	staticFileHandler := http.StripPrefix("/assets/", http.FileServer(staticFileDirectory))
 	// The "PathPrefix" method acts as a matcher, and matches all routes starting
@@ -547,7 +546,7 @@ Since we need to create our bird encyclopedia, lets create a simple HTML documen
 
 <body>
   <h1>The bird encyclopedia</h1>
-  <!-- 
+  <!--
     This section of the document specifies the table that will
     be used to display the list of birds and their description
    -->
@@ -562,8 +561,8 @@ Since we need to create our bird encyclopedia, lets create a simple HTML documen
   </table>
   <br/>
 
-  <!-- 
-    This section contains the form, that will be used to hit the 
+  <!--
+    This section contains the form, that will be used to hit the
     `POST /bird` API that we will build in the next section
    -->
   <form action="/bird" method="post">
@@ -575,7 +574,7 @@ Since we need to create our bird encyclopedia, lets create a simple HTML documen
     <input type="submit" value="Submit">
   </form>
 
-  <!-- 
+  <!--
     Finally, the last section is the script that will
     run on each page load to fetch the list of birds
     and add them to our existing table
@@ -621,8 +620,9 @@ Since we need to create our bird encyclopedia, lets create a simple HTML documen
 ## Adding the bird REST API handlers
 
 As we can see, we will need to implement two APIs in order for this application to work:
-1. `GET /bird` - that will fetch the list of all birds currently in the system
-2. `POST /bird` - that will add an entry to our existing list of birds
+
+1.  `GET /bird` - that will fetch the list of all birds currently in the system
+2.  `POST /bird` - that will add an entry to our existing list of birds
 
 For this, we will write the corresponding handlers.
 
@@ -700,9 +700,10 @@ The last step, is to add these handler to our router, in order to enable them to
 ```
 
 <!-- TODO: test routing, and both handlers -->
-The tests for both these handlers and the routing involved are similar to the previous tests we wrote for the `GET /hello` handler and static file server, and are left as an exercise for the reader. 
 
->If you're lazy, you can still see the tests in the [source code](https://github.com/sohamkamani/blog_example__go_web_app/blob/master/bird_handlers_test.go)
+The tests for both these handlers and the routing involved are similar to the previous tests we wrote for the `GET /hello` handler and static file server, and are left as an exercise for the reader.
+
+> If you're lazy, you can still see the tests in the [source code](https://github.com/sohamkamani/blog_example__go_web_app/blob/master/bird_handlers_test.go)
 
 ## Adding a database
 
@@ -714,5 +715,4 @@ Until now, our code was easy to reason about and test, since it was a standalone
 
 You can read about how to integrate a postgres database into your Go application in my [next post](/blog/2017/10/18/golang-adding-database-to-web-application/)
 
-___You can find the source code for this post [here](https://github.com/sohamkamani/blog_example__go_web_app)___
-
+**\_You can find the source code for this post [here](https://github.com/sohamkamani/blog_example**go_web_app)\_\_\_

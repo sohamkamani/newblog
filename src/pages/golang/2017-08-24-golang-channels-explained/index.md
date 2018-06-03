@@ -49,14 +49,14 @@ func multiplyByTwo(num int) int {
 
 We can visualize this program as a set of two blocks: one being the main funciton, and the other being the multiplyByTwo goroutine.
 
-![go routines as blocks](/assets/images/posts/go-channels/goroutines-1.svg)
+![go routines as blocks](../../images/go-channels/goroutines-1.svg)
 
 The problems with this implementation (that can also be seen from the diagram), is that these two parts of our code are rather disconnected. As a consequence :
 
 - We cannot access the result of `multiplyByTwo` in the `main` function.
 - We have no way to know when the `multiplyByTwo` goroutine completes. As a result of this, we have to pause the `main` function by calling `time.Sleep`, which is a hacky solution at best.
 
-## Example #1 - Adding a channel to our goroutine 
+## Example #1 - Adding a channel to our goroutine
 
 Let's now look at some code that introduces how to make and use a channel in Go ([Run this code](https://play.golang.org/p/mIRGjGxYM3)):
 
@@ -93,9 +93,9 @@ func multiplyByTwo(num int, out chan<- int) {
 
 A channel gives us a way to "connect" the different concurrent parts of our program. In this case, we can represent this connection between our two concurrent blocks of code visually :
 
-![go routines as blocks with channel](/assets/images/posts/go-channels/goroutines-2.svg)
+![go routines as blocks with channel](../../images/go-channels/goroutines-2.svg)
 
-Channels can be thought of as "pipes" or "arteries" that connect the different concrrent parts of our code. 
+Channels can be thought of as "pipes" or "arteries" that connect the different concrrent parts of our code.
 
 ### Directionality
 
@@ -142,11 +142,11 @@ fmt.Println(<-out)
 
 The `<-out` statement will block the code _until_ some data is received on the `out` channel. It helps to then visualize this by splitting the `main` block into two parts : the part that runs until its time to wait for the channel to receive data, and the part that is run after.
 
-![go routines as blocks with channel, with blocking code](/assets/images/posts/go-channels/goroutines-3.svg)
+![go routines as blocks with channel, with blocking code](../../images/go-channels/goroutines-3.svg)
 
-The second part of `main` can only be run once data is received through the channel, which is why the __green arrow__ connects to the second part.
+The second part of `main` can only be run once data is received through the channel, which is why the **green arrow** connects to the second part.
 
-The __dotted arrow__ added here is to show that it is the `main` function that started the `multiplyByTwo` goroutine.
+The **dotted arrow** added here is to show that it is the `main` function that started the `multiplyByTwo` goroutine.
 
 ## Example #2 - Two single directional channels
 
@@ -167,7 +167,7 @@ func main() {
 	// We now supply 2 channels to the `multiplyByTwo` function
 	// One for sending data and one for receiving
 	go multiplyByTwo(in, out)
-	
+
 	// We then send it data through the channel and wait for the result
 	in <- n
 	fmt.Println(<-out)
@@ -189,7 +189,7 @@ func multiplyByTwo(in <-chan int, out chan<- int) {
 
 Now, in addition to `main`, `multiplyByTwo` is also divided into 2 parts: the part before and after the point where we wait on the `in` channel (`num := <- in`)
 
-![go routines as blocks with channel](/assets/images/posts/go-channels/goroutines-4.svg)
+![go routines as blocks with channel](../../images/go-channels/goroutines-4.svg)
 
 # Example #3 - Multiple concurrent goroutines
 
@@ -212,7 +212,7 @@ func main() {
 	go multiplyByTwo(in, out)
 
 	// Up till this point, none of the created goroutines actually do
-	// anything, since they are all waiting for the `in` channel to 
+	// anything, since they are all waiting for the `in` channel to
 	// receive some data
 	in <- 1
 	in <- 2
@@ -236,7 +236,7 @@ It is important to note that there is no guarantee as to which goroutine will ac
 
 This can be slightly harder to visualize, but hang in there!
 
-![go routines as blocks with channel](/assets/images/posts/go-channels/goroutines-5.svg)
+![go routines as blocks with channel](../../images/go-channels/goroutines-5.svg)
 
 The multiple concurrent goroutines require a different visualization for channels. Here, we see a channel as a kind of "pool" of data (formally known as a buffer). For the purple channel (`in`), the `main` function puts in data, and one of the initialized goroutines receive the data. _There is no information regarding which goroutine takes which data_. This is the same for the green `out` channel going back into the `main` routine.
 

@@ -22,7 +22,7 @@ Let's assume this `div` is used to show your status on a popular social media si
 
 If you were to be a malicious user, you could change your status from "I am feeling alright" to "\<script\>alert('I am feeling great!')\</script\>", but the thing is, your friends would not see your status as "\<script\>alert('I am feeling great!')\</script\>", but instead, they would get an alert message which would look something like this :
 
-![xss](/assets/images/posts/web-security-essentials/xss-alert.png)
+![xss](../../images/web-security-essentials/xss-alert.png)
 
 This is because the text you just put in is rendered to HTML by default, which will make the content inside the div look like this :
 
@@ -61,7 +61,6 @@ If you want to learn more about security on the web, be sure to read my [other p
 [Sessions and cookies](/blog/2017/01/08/web-security-session-cookies/)  
 [CSRF (Cross site request forgery)](/blog/2017/01/14/web-security-cross-site-request-forgery/)  
 [Human Error and UI/UX design](/blog/2017/01/14/web-security-human-error/)
-
 
 <script src="/assets/scripts/xhr-html-encode.min.js">
 </script>

@@ -4,7 +4,7 @@ title: Session based authentication in Go 📂
 date: 2018-03-25T01:45:12.000Z
 categories: go golang web session security uuid
 description: "How to implement session based authentication in your Go application"
-main_image: https://www.sohamkamani.com/assets/images/posts/golang-session-auth/go-session-banner.png
+main_image: https://www.sohamkamani.com../../images/golang-session-auth/go-session-banner.png
 comments: true
 ---
 
@@ -12,9 +12,10 @@ When a user signs in to your application, their authorization has to be persiste
 
 One way to do this is to store the users _"session"_. A session is started once a user logs in, and expires some time after that. Each logged in user has some reference to the session, which they send with their requests. We then use this reference to look up the user that it belongs to and return information specific to them.
 
-![banner](/assets/images/posts/golang-session-auth/go-session-banner.png)
+![banner](../../images/golang-session-auth/go-session-banner.png)
 
 <!-- more -->
+
 ## Overview
 
 In this post, we will look at how to store and persist the session of a logged in user, so that they can use other routes in our application.
@@ -24,14 +25,14 @@ We will build an application with a `/signin` and a `/welcome` route.
 - The `/signin` route will accept a users username and password, and set a session cookie if successful.
 - The `/welcome` route will be a simple HTTP `GET` route which will show a personalized message to the currently logged in user.
 
-The session information of the user will be stored in a Redis cache. For this tutorial, we will assume that the users that are to sign in are already registered with us. 
+The session information of the user will be stored in a Redis cache. For this tutorial, we will assume that the users that are to sign in are already registered with us.
 If you want to read more on how to sign up and store password information of new users, I have written about it in my [last post](/blog/2018/02/25/golang-password-authentication-and-storage/)
 
->If you just want to see the source code for this tutorial, you can find it [here](https://github.com/sohamkamani/go-session-auth-example)
+> If you just want to see the source code for this tutorial, you can find it [here](https://github.com/sohamkamani/go-session-auth-example)
 
 ## Creating the HTTP server
 
-Let's start by initializing the HTTP server with the required routes and a redis connection: 
+Let's start by initializing the HTTP server with the required routes and a redis connection:
 
 ```go
 import (
@@ -40,7 +41,7 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
-// Store the redis connection as a package level variable 
+// Store the redis connection as a package level variable
 var cache redis.Conn
 
 func main() {
@@ -128,7 +129,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-![sign in diagram](/assets/images/posts/golang-session-auth/session-auth-signin.png)
+![sign in diagram](../../images/golang-session-auth/session-auth-signin.png)
 
 If a user logs in correctly, this handler will then set a cookie on the client side, and inside its own cache.
 Once a cookie is set on a client, it is sent along with every request henceforth. Now that we have persisted the clients session information on this client (in the form of the `session_token` cookie) and the server (inside our redis cache), we can write our welcome handler to handle user specific information.
@@ -176,14 +177,16 @@ func Welcome(w http.ResponseWriter, r *http.Request) {
 ```
 
 From the code, we can see that our welcome handler gives us an "unauthorized" (or `401`) status under certain circumstances:
-1. If there is no `session_token` cookie along with the request (which means that the requestor hasn't logged in)
-2. If the session token is not present in our cache (which means that the users session has expired, or that the requestor is sending us a malicious session token)
 
-![welcome diagram](/assets/images/posts/golang-session-auth/session-auth-welcome.png)
+1.  If there is no `session_token` cookie along with the request (which means that the requestor hasn't logged in)
+2.  If the session token is not present in our cache (which means that the users session has expired, or that the requestor is sending us a malicious session token)
 
-Session based authentication keeps your users sessions secure in a couple of ways: 
-1. Since the session tokens are randomly generated, an malicious user cannot guess his way into a users session.
-2. Even if a users session token is compromised somehow, it cannot be used after its expiry.
+![welcome diagram](../../images/golang-session-auth/session-auth-welcome.png)
+
+Session based authentication keeps your users sessions secure in a couple of ways:
+
+1.  Since the session tokens are randomly generated, an malicious user cannot guess his way into a users session.
+2.  Even if a users session token is compromised somehow, it cannot be used after its expiry.
 
 One common technique that is used in conjunction with the second point is to refresh the users session token in small time intervals. So, once a user hits a "refresh" route (typically when their current token is about to expire), a new token will be issued with a renewed expiry time. The smaller this time interval, the less likely it is for any one token to compromise a users account.
 
@@ -230,7 +233,7 @@ func Refresh(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	
+
 	// Set the new token as the users `session_token` cookie
 	http.SetCookie(w, &http.Cookie{
 		Name:    "session_token",
@@ -240,7 +243,7 @@ func Refresh(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-![refresh token diagram](/assets/images/posts/golang-session-auth/session-auth-refresh.png)
+![refresh token diagram](../../images/golang-session-auth/session-auth-refresh.png)
 
 We can now add this to the rest of our routes:
 

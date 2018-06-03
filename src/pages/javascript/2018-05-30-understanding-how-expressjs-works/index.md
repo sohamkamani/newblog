@@ -3,13 +3,13 @@ layout: post
 title: How express.js works - Understanding the internals of the express library ⚙️
 date: 2018-05-30T08:45:12.000Z
 categories: javascript node js express
-main_image: "https://www.sohamkamani.com/assets/images/posts/express-internals/express-routing-logo.png"
+main_image: "https://www.sohamkamani.com../../images/express-internals/express-routing-logo.png"
 comments: true
 ---
 
 If you've worked on web application development in node, it's likely you've heard of [express.js](https://expressjs.com/). Express is one of the most popular lightweight web application frameworks for node.
 
-![logo](/assets/images/posts/express-internals/express-routing-logo.png)
+![logo](../../images/express-internals/express-routing-logo.png)
 
 In this post, we will go through the source code of express, and try to understand how it works under the hood. Studying how a popular open source library works, will help us make better applications using it, and reduces some of the "magic" involved when using it.
 
@@ -200,7 +200,7 @@ Let's recap what happens when you create a route using the `app.get` method:
 
 In the end, all your handlers are stored inside the `app` instance as layers which are inside the routes stack, whose `dispatch` methods are assigned to layers that are inside the routers stack:
 
-![creating routes](/assets/images/posts/express-internals/express-routing.svg)
+![creating routes](../../images/express-internals/express-routing.svg)
 
 Handling an HTTP request once it comes in takes a similar part, and we will get to that [in a bit](#handling-an-http-request)
 
@@ -317,7 +317,7 @@ Route.prototype.dispatch = function dispatch(req, res, done) {
 
 Similar to the router, each route loops through all its layers, and calls their `handle_request` methods, which execute the layers defined handler method, which in our case is the request handler that we defined in our application code. Finally, the HTTP request comes into the realm of our application code.
 
-![journey of an http request](/assets/images/posts/express-internals/express-routing-http.svg)
+![journey of an http request](../../images/express-internals/express-routing-http.svg)
 
 ## Everything else
 

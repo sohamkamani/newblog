@@ -51,10 +51,10 @@ Let us assume, for the sake of experimentation, that each of the 4 snippets of c
 #### Case 1 (Waiting time = 20ms)
 
 With synchronous execution :  
-![Sync 20ms](/assets/images/posts/understanding-async-js/sync.png)
+![Sync 20ms](../../images/understanding-async-js/sync.png)
 
 With asynchronous execution :  
-![Async 20](/assets/images/posts/understanding-async-js/async.png)
+![Async 20](../../images/understanding-async-js/async.png)
 
 Snippet 4 doesn't have to wait for our response to arrive in order to execute, but snippet 3 does. Our javascript code handles this by defining tasks that need to wait inside the callback and other tasks outside of it. In the case of our python example, all code after we send the request is blocked until the response arrives.  
 This gives us a *net loss of **10ms*** in this case for the synchronous implementation.
@@ -62,10 +62,10 @@ This gives us a *net loss of **10ms*** in this case for the synchronous implemen
 #### Case 2 (Waiting time = 5ms)
 
 With synchronous execution :  
-![Sync 20ms](/assets/images/posts/understanding-async-js/sync-less.png)
+![Sync 20ms](../../images/understanding-async-js/sync-less.png)
 
 With asynchronous execution :  
-![Async 20](/assets/images/posts/understanding-async-js/async-less.png)
+![Async 20](../../images/understanding-async-js/async-less.png)
 
 Synchronous execution with a smaller waiting time doesn't look much different from the last picture, but the asynchronous timing diagram is pretty interesting. We see that snippet 4 starts execution as usual during waiting time, but snippet 3 doesnt execute right after the waiting time is over. **This is because snippet 3 and snippet 4 are running on the same thread** and hence snippet 3 has to wait for 4 to finish before it can start. This is a much better illustration of what it means to be *single threaded and asynchronous*.
 

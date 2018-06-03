@@ -4,7 +4,7 @@ title:  How to install and run Kafka on your machine 🌪
 date:   2017-11-22 08:45:12
 categories: kafka
 comments: true
-main_image: "https://www.sohamkamani.com/assets/images/posts/kafka/basic_arch.svg"
+main_image: "https://www.sohamkamani.com../../images/kafka/basic_arch.svg"
 ---
 
 [Apache Kafka](https://kafka.apache.org/) is a distributed streaming platform. It can be used for anything ranging from a distributed message broker to a platform for processing data streams.
@@ -29,14 +29,14 @@ You should see a folder named `kafka_2.11-1.0.0`, and inside you will see `bin` 
 
 There are a bunch of processes that we need to start to run our cluster :
 
-1. __Zookeeper__ : Which is used by Kafka to maintain state between the nodes of the cluster.
-2. __Kafka brokers__ : The "pipes" in our pipeline, which store and emit data.
-3. __Producers__ : That insert data into the cluster.
-4. __Consumers__ : That read data from the cluster.
+1.  **Zookeeper** : Which is used by Kafka to maintain state between the nodes of the cluster.
+2.  **Kafka brokers** : The "pipes" in our pipeline, which store and emit data.
+3.  **Producers** : That insert data into the cluster.
+4.  **Consumers** : That read data from the cluster.
 
-![basic architecture](/assets/images/posts/kafka/basic_arch.svg)
+![basic architecture](../../images/kafka/basic_arch.svg)
 
->Note that each block in this diagram can be on a different system on the network.
+> Note that each block in this diagram can be on a different system on the network.
 
 ## Starting Zookeeper
 
@@ -80,7 +80,7 @@ cp config/server.properties config/server.3.properties
 
 Change the above 3 properties for each copy of the file so that they are all unique.
 
-__server.1.properties__
+**server.1.properties**
 
 ```
 broker.id=1
@@ -88,7 +88,7 @@ listeners=PLAINTEXT://:9093
 log.dirs=/tmp/kafka-logs1
 ```
 
-__server.2.properties__
+**server.2.properties**
 
 ```
 broker.id=2
@@ -96,7 +96,7 @@ listeners=PLAINTEXT://:9094
 log.dirs=/tmp/kafka-logs2
 ```
 
-__server.3.properties__
+**server.3.properties**
 
 ```
 broker.id=3
@@ -154,7 +154,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9093,localhost:9094,localh
 
 The `broker-list` option points the producer to the addresses of the brokers that we just provisioned, and the `topic` option specifies the topic you want the data to come under.
 
-You should now see a command prompt, in which you can enter a bunch of text which gets inserted into the Kafka cluster you just created every time you hit enter. 
+You should now see a command prompt, in which you can enter a bunch of text which gets inserted into the Kafka cluster you just created every time you hit enter.
 
 ## Consumers
 
@@ -174,7 +174,7 @@ When you run the above command, you should immediately see all the messages that
 
 Additionally, if you input anymore messages with the producer while the consumer is running, you should see it output into the console in real time.
 
->And in this way, Kafka acts sort of like a __persistent message queue__, saving the messages that were not yet read by the consumer, while passing on new messages as they come while the consumer is running
+> And in this way, Kafka acts sort of like a **persistent message queue**, saving the messages that were not yet read by the consumer, while passing on new messages as they come while the consumer is running
 
 ## Messing things up
 

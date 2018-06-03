@@ -6,7 +6,7 @@ categories: web security human error phishing
 comments: true
 ---
 
-Throughout my other posts on web security, we looked at everything that could go wrong with our application from a technical perspective. However, despite all our efforts to make our application objectively as secure as possible, there is still one thing we should keep in mind : our application is going to be used by humans, and humans invariably make mistakes. 
+Throughout my other posts on web security, we looked at everything that could go wrong with our application from a technical perspective. However, despite all our efforts to make our application objectively as secure as possible, there is still one thing we should keep in mind : our application is going to be used by humans, and humans invariably make mistakes.
 
 Many potential adversaries are aware of this fact and use every opportunity to take advantage of it :
 
@@ -27,7 +27,7 @@ Ads are a necessary evil. No one wants to put them their website, but sometimes,
 
 At its worst, misplaced external content can end up making a content hosting site look like this :
 
-![ads image](/assets/images/posts/web-security-essentials/human-error-1.png)
+![ads image](../../images/web-security-essentials/human-error-1.png)
 
 Which one's the _actual_ download button? After some experimentation, I found out that it's the little red one on the bottom right. But that was certainly not my first guess. The other links lead to a direct `.apk` (android app installation file) download, which could potentially be harmful if opened on an android phone.
 
@@ -35,13 +35,13 @@ Ads and other external content should be placed away from the main content, and 
 
 ## 2. Re-authenticate users for super sensitive actions
 
-There is a chance that someone might leave their laptop open by mistake in a place where others can access it (think about all the times your friends posted a scandalous facebook status on your behalf). While some actions are relatively harmless, others have much costlier implications. 
+There is a chance that someone might leave their laptop open by mistake in a place where others can access it (think about all the times your friends posted a scandalous facebook status on your behalf). While some actions are relatively harmless, others have much costlier implications.
 
 This is why users should always be reauthenticated before performing an action that may compromise their security. For example, many websites like Google require you to enter your password again if you are changing your phone number, alternate email, or date of birth.
 
 ## 3. Log your users out after some time
 
-Joe went and visited a public internet cafe to check his bank details online. The problem is that Joe, being the careless person that he is, forgot to log out of his online banking portal. 
+Joe went and visited a public internet cafe to check his bank details online. The problem is that Joe, being the careless person that he is, forgot to log out of his online banking portal.
 
 Ordinarily anyone who uses that same computer would now have access to Joes banking portal. Fortunately, the banking portal had a session expiry time of 15 minutes, which means that if there is no activity on the website for more than 15 minutes, the current user is automatically logged out.
 
@@ -55,12 +55,11 @@ A common example is the "You are being redirected to another site" warning that 
 
 Another example, which I thought was really clever, is Facebook's warning message which pops up when you open the browser console :
 
-![facebook console image](/assets/images/posts/web-security-essentials/facebook-console-message.png)
-
+![facebook console image](../../images/web-security-essentials/facebook-console-message.png)
 
 ## 5. Extra caution always helps
 
-This may not be necessary for all occasions, but it's still something worth appreciating. 
+This may not be necessary for all occasions, but it's still something worth appreciating.
 
 Every time I sign in to my Google or Twitter account from a new device, or from a location different from the one I am usually in, I get an email letting me know.
 
@@ -73,4 +72,4 @@ If you want to learn more about security on the web, be sure to read my [other p
 [Password storage](/blog/2017/01/01/web-security-password-storage/)  
 [Sessions and cookies](/blog/2017/01/08/web-security-session-cookies/)  
 [CSRF (Cross site request forgery)](/blog/2017/01/14/web-security-cross-site-request-forgery/)  
-[SQL Injection](/blog/2016/11/24/what-is-sql-injection/)  
+[SQL Injection](/blog/2016/11/24/what-is-sql-injection/)

@@ -52,10 +52,10 @@ Now depending on which of these two operations completes first, our value printe
 
 This is why it's called a data _race_ : the value returned from `getNumber` changes depending on which of the operations 1 or 2 finish first.
 
-![read finishing first](/assets/images/posts/go-datarace/datarace1.svg)
+![read finishing first](../../images/go-datarace/datarace1.svg)
 <p class="image-caption">👆 Data race with read finishing first</p>
 
-![write finishing first](/assets/images/posts/go-datarace/datarace2.svg)
+![write finishing first](../../images/go-datarace/datarace2.svg)
 <p class="image-caption">👆 Data race with write finishing first</p>
 
 As you can imagine, its horrible having to test and use code which acts differently every single time you call it, and this is why data races pose such a huge problem.
@@ -139,7 +139,7 @@ func getNumber() int {
 ```
 [Try it here](https://play.golang.org/p/RHbGQOI3cUv)
 
-![waitgroup diagram](/assets/images/posts/go-datarace/wg.svg)
+![waitgroup diagram](../../images/go-datarace/wg.svg)
 
 ### Blocking with channels
 
@@ -162,7 +162,7 @@ func getNumber() int {
 ```
 [Try it here](https://play.golang.org/p/oSnM7_7gI3X)
 
-![channel diagram](/assets/images/posts/go-datarace/blockchannel.svg)
+![channel diagram](../../images/go-datarace/blockchannel.svg)
 
 Blocking inside the `getNumber` function, although simple, would get troublesome if we want to call the function repeatedly. The next method follows a more flexible approach towards blocking.
 
@@ -197,7 +197,7 @@ func main() {
 ```
 [Try it here](https://play.golang.org/p/POYn3UalH3e)
 
-![return channel diagram](/assets/images/posts/go-datarace/returnchannel.svg)
+![return channel diagram](../../images/go-datarace/returnchannel.svg)
 
 This approach is more flexible because it allows higher level functions to decide their own blocking and concurrency mechanisms, instead of treating the `getNumber` function as synchronous.
 
@@ -246,10 +246,10 @@ func getNumber() int {
 
 We can then use `GetNumber` just like with other cases. At first glance, this method may seem useless, since we still do not have any guarantee as to what the value of `i` will be.
 
-![mutex read finishing first](/assets/images/posts/go-datarace/mutexread.svg)
+![mutex read finishing first](../../images/go-datarace/mutexread.svg)
 <p class="image-caption">👆 Mutex with write locking first</p>
 
-![mutex write finishing first](/assets/images/posts/go-datarace/mutexwrite.svg)
+![mutex write finishing first](../../images/go-datarace/mutexwrite.svg)
 <p class="image-caption">👆 Mutex with read locking first</p>
 
 The true value of the mutex shows when we have _multiple writes_, which are intermixed with read operations. Although, you will not need mutexes in most cases, since the previous methods work well enough, it helps to know about them for these kinds of situations.

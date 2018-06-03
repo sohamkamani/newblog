@@ -15,18 +15,18 @@ In order to do this, we assume that the input `X`, and the output `Y` have a lin
 
 We can get a better understanding of linear regression from the following chart:
 
-![sample plot](/assets/images/posts/stat-learning/sample-reg-plot.png)
+![sample plot](../../images/stat-learning/sample-reg-plot.png)
 
 The line is the linear relationship that we _predicted_ based on the points which we observed.
 
->If you want to get a brief recap of the theory behind linear regression, you can see my notes [here](https://github.com/sohamkamani/sohamkamani.github.io/blob/master/notes/linear_regression.md)
+> If you want to get a brief recap of the theory behind linear regression, you can see my notes [here](https://github.com/sohamkamani/sohamkamani.github.io/blob/master/notes/linear_regression.md)
 
 In order to perform linear regression with python, we will need to:
 
-1. Generate the sample data, and divide it into training and testing data.
-2. Create a linear regression model
-3. Fit our model using the training data
-4. Test our model using the testing data
+1.  Generate the sample data, and divide it into training and testing data.
+2.  Create a linear regression model
+3.  Fit our model using the training data
+4.  Test our model using the testing data
 
 <!-- more -->
 
@@ -36,14 +36,14 @@ In order to use scikit learn to perform linear regression, you will have to [ins
 
 ### Generating our data
 
-Instead of using a popular sample dataset, let's generate our own data instead. 
+Instead of using a popular sample dataset, let's generate our own data instead.
 This will help us understand the values of the sample data better than if we took a real life dataset, and will also help us judge the accuracy of our model better, as you will see in the later sections.
 
 Let's assume there is only one predictor variable. In that case the linear relationship will be of the form:
 
-$$y = \beta _0 + \beta _1x_1 + \epsilon$$
+$$y = \beta \_0 + \beta \_1x_1 + \epsilon$$
 
-If we normalize our data, so that   $$ \beta _0=0 $$ , we will get the simplified form of the above equation:
+If we normalize our data, so that $$ \beta \_0=0 $$ , we will get the simplified form of the above equation:
 
 $$y = \beta x + \epsilon$$
 
@@ -128,15 +128,15 @@ plt.show()
 
 Which will give us the following plot:
 
-![regression plot](/assets/images/posts/stat-learning/regression_plot.png)
+![regression plot](../../images/stat-learning/regression_plot.png)
 
 The blue points show us the testing data that we generated. The red line is the predicted relationship between $$x$$ and $$y$$ as determined by linear regression. The green line is the _actual_ relationship, with the $$\beta$$ value that we used to generate the data.
 
 ## Working with multiple predictor variables
 
-In the previous sections, we used just one predictor. Let's generate data with more than one predictor variable to estimate $$y$$. In this case, the relationship between $$X$$ and $$y$$ (ignoring the $$\beta _0$$ term) would be of the form:
+In the previous sections, we used just one predictor. Let's generate data with more than one predictor variable to estimate $$y$$. In this case, the relationship between $$X$$ and $$y$$ (ignoring the $$\beta \_0$$ term) would be of the form:
 
-$$y = \beta _1x_1 + \beta _2x_2 + ... + \beta _px_p + \epsilon$$
+$$y = \beta \_1x_1 + \beta \_2x_2 + ... + \beta \_px_p + \epsilon$$
 
 For this, we will have to make a new data generation function:
 
@@ -196,7 +196,7 @@ plt.show()
 
 Which will give us:
 
-![regression 3d plot](/assets/images/posts/stat-learning/regression_3d_plot.png)
+![regression 3d plot](../../images/stat-learning/regression_3d_plot.png)
 
 An interesting observation is that when we plot each individual variable against $$y$$, it appears to have a lot of variance. However, when we visualize the _combined_ effects in the form of a 3d plot, we can see the the result actually forms a plane, which when viewed at a skewed angle (to see the edge of the plane formed), looks like it has a lot less variance.
 
