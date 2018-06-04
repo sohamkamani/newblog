@@ -2,7 +2,7 @@
 layout: post
 title: How to generate an error stack trace in Go 🥞
 date: 2018-05-15T01:45:12.000Z
-categories: go golang
+categoriesA: ["go" ,"golang"]
 description: "This post describes how to generate an error stack trace in Go"
 comments: true
 ---

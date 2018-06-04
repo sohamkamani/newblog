@@ -1,12 +1,39 @@
-:not(pre)>code[class*="language-"] {
+:not(pre) > code[class*="language-"] {
   background: #eef;
   color: inherit;
   padding: 2px 5px;
 }
 
-a>code {
+a > code {
   text-shadow: none;
   text-decoration: underline;
 }
 
-.blog-post {}
+.blog-post-container {
+  display: grid;
+  display: -ms-grid;
+  grid-template-columns: auto 800px auto;
+  grid-template-rows: auto;
+  grid-template-areas: "header header header" "index main sidebar" "footer footer footer";
+}
+
+.blog-post {
+  grid-area: main;
+}
+
+.blog-post__header {
+  font-size: 2.2em;
+}
+
+.header {
+  grid-area: header;
+  text-align: center;
+}
+
+.content-index {
+  grid-area: index;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}

@@ -1,42 +1,30 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import Link from 'gatsby-link'
 import get from 'lodash/get'
 
+import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
+import ContentIndex from '../components/ContentIndex'
 import Bio from '../components/Bio'
 
 class BlogPostTemplate extends React.Component {
-  render() {
+  render () {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
-    const { previous, next } = this.props.pathContext
 
     return (
-      <div className="blog-post">
+      <div className='blog-post-container'>
         <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
-        <h1>{post.frontmatter.title}</h1>
-        <p>{post.frontmatter.date}</p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr />
-        <Bio />
-
-        <ul>
-          {previous && (
-            <li>
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            </li>
-          )}
-
-          {next && (
-            <li>
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            </li>
-          )}
-        </ul>
+        <Header />
+        <Sidebar />
+        <ContentIndex />
+        <div className='blog-post'>
+          <h1 className='blog-post__header'>{post.frontmatter.title}</h1>
+          <p>{post.frontmatter.date}</p>
+          <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <hr />
+          <Bio />
+        </div>
       </div>
     )
   }
@@ -62,3 +50,33 @@ export const pageQuery = graphql`
     }
   }
 `
+
+// {
+//   site {
+//     siteMetadata {
+//       title
+//       author
+//     }
+//   }
+//   markdownRemark(fields: {slug: {eq: "/2018-05-15-golang-error-stack-trace/"}}) {
+//     id
+//     frontmatter {
+//       categoriesA
+//       title
+//       date(formatString: "MMMM DD, YYYY")
+//     }
+//   }
+//   related: allMarkdownRemark(limit: 1000, sort: {fields: [frontmatter___date], order: DESC}, filter: {frontmatter: {categoriesA: {in: ["go"]}}}) {
+//     totalCount
+//     edges {
+//       node {
+//         id
+//         frontmatter {
+//           categoriesA
+//           title
+//           date(formatString: "MMMM DD, YYYY")
+//         }
+//       }
+//     }
+//   }
+// }

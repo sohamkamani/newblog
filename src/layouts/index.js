@@ -1,38 +1,16 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import '../utils/prism.css'
 import '../utils/custom.css'
 
 class Template extends React.Component {
-  render() {
-    const { location, children } = this.props
-    let header
-    if (location.pathname === '/') {
-      header = (
-        <h1>
-          <Link to={'/'}>Gatsby Starter Blog</Link>
-        </h1>
-      )
-    } else {
-      header = (
-        <h3>
-          <Link to={'/'}>Gatsby Starter Blog</Link>
-        </h3>
-      )
-    }
-    return (
-      <div>
-        {header}
-        {children()}
-      </div>
-    )
+  render () {
+    const { children } = this.props
+    return <div className='main-container'>{children()}</div>
   }
 }
 
 Template.propTypes = {
-  children: React.PropTypes.func,
-  location: React.PropTypes.object,
-  route: React.PropTypes.object
+  children: React.PropTypes.func
 }
 
 export default Template
